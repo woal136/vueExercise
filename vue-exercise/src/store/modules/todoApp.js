@@ -41,6 +41,10 @@ const mutations = {
         localStorage.removeItem(payload.todoItem.item);
         // 흐음... 쉽지 않네...
         state.todoItems.splice(payload.index, 1);
+    },
+    clearAllItems() {
+        localStorage.clear();
+        state.todoItems = [];
     }
 };
 
