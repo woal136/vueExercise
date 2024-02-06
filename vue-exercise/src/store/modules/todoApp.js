@@ -17,7 +17,9 @@ const state = {
 };
 
 const getters = {
-
+    getTodoItems(state) {
+        return state.todoItems;
+    }
 };
 
 const mutations = {
@@ -28,6 +30,17 @@ const mutations = {
         };
         localStorage.setItem(todoItem, JSON.stringify(obj));
         state.todoItems.push(obj);
+    },
+    toggleOneItem(state, payload) {
+        state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
+        // 흐음....
+        localStorage.removeItem(payload.todoItem.item);
+        localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
+    },
+    removeOneItem(state, payload) {
+        localStorage.removeItem(payload.todoItem.item);
+        // 흐음... 쉽지 않네...
+        state.todoItems.splice(payload.index, 1);
     }
 };
 
